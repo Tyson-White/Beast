@@ -1,0 +1,154 @@
+{
+  "products": [
+    {
+      "productID": 0,
+      "productName": "Prada Coat",
+      "imgURL": "./src/assets/img/coat_card.png",
+      "season": "winter",
+      "type": "outerwear",
+      "thingType": "coat",
+      "productPrice": 18.23,
+      "productColors": ["gray", "brown", "red"]
+    },
+    {
+      "productID": 1,
+      "productName": "hoodie freddy fazber",
+      "imgURL": "./src/assets/img/hoodie_black.jpg",
+      "season": "autumn",
+      "type": "clothes",
+      "thingType": "sweater",
+      "productPrice": 18.56,
+      "productColors": ["gray", "brown", "red"]
+    },
+    {
+      "productID": 2,
+      "productName": "pantsX Adidas",
+      "imgURL": "./src/assets/img/pants_white.webp",
+      "season": "spring",
+      "type": "clothes",
+      "thingType": "pants",
+      "productPrice": 18.56,
+      "productColors": ["gray", "brown", "red"]
+    },
+    {
+      "productID": 3,
+      "productName": "Nike Court Vision",
+      "imgURL": "./src/assets/img/nike_sneakers.webp",
+      "season": "summer",
+      "type": "shoes",
+      "thingType": "sneakers",
+      "productPrice": 102.43,
+      "productColors": ["gray", "brown", "red"]
+    },
+    {
+      "productID": 4,
+      "productName": "pantsX Prada",
+      "imgURL": "./src/assets/img/pants_Prada.webp",
+      "season": "winter",
+      "type": "clothes",
+      "thingType": "pants",
+      "productPrice": 18.56,
+      "productColors": ["gray", "brown", "red"]
+    },
+    {
+      "productID": 5,
+      "productName": "SweaterX blue",
+      "imgURL": "./src/assets/img/sweater_blue.jpg",
+      "season": "spring",
+      "type": "clothes",
+      "thingType": "sweater",
+      "productPrice": 18.56,
+      "productColors": ["gray", "brown", "red"]
+    },
+    {
+      "productID": 6,
+      "productName": "Balenciaga Coat",
+      "imgURL": "./src/assets/img/Coat_2.jpg",
+      "season": "winter",
+      "type": "outerwear",
+      "thingType": "coat",
+      "productPrice": 18.23,
+      "productColors": ["gray", "brown", "red"]
+    },
+    {
+      "productID": 7,
+      "productName": "Balenciaga Triple S",
+      "imgURL": "./src/assets/img/Puma_Rise_X.webp",
+      "season": "autumn",
+      "type": "shoes",
+      "thingType": "sneakers",
+      "productPrice": 176.32,
+      "productColors": ["gray", "brown", "red"]
+    },
+    {
+      "productID": 8,
+      "productName": "JacketX Brown",
+      "imgURL": "./src/assets/img/jacket_brown.webp",
+      "season": "autumn",
+      "type": "clothes",
+      "thingType": "jackets",
+      "productPrice": 44.86,
+      "productColors": ["gray", "brown", "red"]
+    },
+    {
+      "productID": 9,
+      "productName": "Force White",
+      "imgURL": "./src/assets/img/sneakers_nike_white.png",
+      "season": "autumn",
+      "type": "shoes",
+      "thingType": "sneakers",
+      "productPrice": 108.92,
+      "productColors": ["gray", "brown", "red"]
+    },
+    {
+      "productID": 10,
+      "productName": "SweaterX rainbow",
+      "imgURL": "./src/assets/img/sweater_rainbow.jpg",
+      "season": "winter",
+      "type": "clothes",
+      "thingType": "sweater",
+      "productPrice": 33.90,
+      "productColors": ["gray", "brown", "red"]
+    },
+    {
+      "productID": 11,
+      "productName": "Pants X",
+      "imgURL": "./src/assets/img/pants_r.png",
+      "season": "summer",
+      "type": "clothes",
+      "thingType": "pants",
+      "productPrice": 55.22,
+      "productColors": ["gray", "brown", "red"]
+    },
+    {
+      "productID": 12,
+      "productName": "Force 3 Track",
+      "imgURL": "./src/assets/img/sneakers_nike.jpg",
+      "season": "summer",
+      "type": "shoes",
+      "thingType": "sneakers",
+      "productPrice": 135.22,
+      "productColors": ["gray", "brown", "red"]
+    },
+    {
+      "productID": 13,
+      "productName": "BootsX Prada",
+      "imgURL": "./src/assets/img/boots_hight.jpg",
+      "season": "spring",
+      "type": "shoes",
+      "thingType": "boots",
+      "productPrice": 135.22,
+      "productColors": ["gray", "brown", "red"]
+    },
+    {
+      "productID": 14,
+      "productName": "Sweater Light",
+      "imgURL": "./src/assets/img/sweater_light.jpg",
+      "season": "spring",
+      "type": "clothes",
+      "thingType": "sweater",
+      "productPrice": 15.54,
+      "productColors": ["gray", "brown", "red"]
+    }
+  ]
+}

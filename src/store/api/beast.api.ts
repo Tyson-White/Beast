@@ -6,7 +6,8 @@ interface ProductsGet {
     limit: number,
     season: string,
     type: string,
-    thingType: string
+    thingType: string,
+    searchValue: string
 }
 
 export const beastApi = createApi({
@@ -17,12 +18,9 @@ export const beastApi = createApi({
     endpoints: (builder) => ({
         getProducts: builder.query<IProduct[], ProductsGet>({
             query: (options) =>
-                `products?_limit=8&_page=${options.page}${options.thingType && options.thingType.toLowerCase() !== "all" ? "&thingType=" + options.thingType.toLowerCase() : ''}${options.type && options.type.toLowerCase() !== "all" ? "&type=" + options.type.toLowerCase() : ''}${options.season && options.season.toLowerCase() !== 'all' ? "&season=" + options.season.toLowerCase() : ''}`
-                
-            
-                
-                
+                `products?_limit=${options.limit}&_page=${options.page}${options.thingType && options.thingType.toLowerCase() !== "all" ? "&thingType=" + options.thingType.toLowerCase() : ''}${options.type && options.type.toLowerCase() !== "all" ? "&type=" + options.type.toLowerCase() : ''}${options.season && options.season.toLowerCase() !== 'all' ? "&season=" + options.season.toLowerCase() : ''}`
         })
+
     })
 })
 

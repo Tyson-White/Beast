@@ -22,7 +22,14 @@ export interface IBanner {
     subtitle: string
 }
 
+export type Field = {
+    label: string,
 
+}
+
+export interface AuthList {
+    list: string[]
+}
 
 export interface ISelect {
     list: string[]

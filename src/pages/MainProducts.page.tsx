@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useCallback, useState} from 'react';
 
 import Slider from "../components/slider/Slider.tsx";
 import Select from "../components/Select.tsx";
@@ -6,6 +6,8 @@ import {useAppSelector, useAppDispatch} from "../store/hooks/hooks.ts";
 import {setSeasonValue, setThingTypeValue, setThingValue} from "../store/slices/selectSlice.ts";
 import ProductCard from "../components/ProductCard.tsx";
 import {useGetProductsQuery} from "../store/api/beast.api.ts";
+
+import debounce from "lodash.debounce"
 
 // SliderBanner backgrounds
 
@@ -16,7 +18,7 @@ interface IThing {
 }
 
 const MainProductsPage = () => {
-    const PAGE_LIMIT: number = 8
+    const PAGE_LIMIT: number = 12
 
     const dispatch = useAppDispatch()
     const season:string[] = ["Summer", "Spring", "Winter", "Autumn"]
@@ -41,9 +43,11 @@ const MainProductsPage = () => {
     ]
 
     const [productsPage, setProductsPage] = useState<number>(1)
+    const [searchValue, setSearchValue] = useState<string>('')
     const seasonValue = useAppSelector(state => state.select.seasonValue)
     const thingValue = useAppSelector(state => state.select.thingValue)
     const thingTypeValue = useAppSelector(state => state.select.thingTypeValue)
+    const [searchDebounce, setSearchDebounce] = useState('')
 
 
     const {data} = useGetProductsQuery({
@@ -51,9 +55,17 @@ const MainProductsPage = () => {
         limit: PAGE_LIMIT,
         season: seasonValue,
         type: thingValue,
-        thingType: thingTypeValue
+        thingType: thingTypeValue,
+        searchValue: searchValue
     })
 
+    const filterData = data?.filter(item => item.productName.toLowerCase().indexOf(searchDebounce.toLowerCase()) >= 0)
+
+    const setValue = useCallback((
+        debounce((string: string) => {
+            setSearchDebounce(string)
+        }, 250)
+    ), [])
 
 
     const prevPage = (): void => {
@@ -75,7 +87,10 @@ const MainProductsPage = () => {
             <div className="container h-[100%] max-w-[1100px] mx-auto ">
                 <div className="main_page_header h-[60px] rounded-[2px] my-[20px] flex justify-between">
                     <div className="flex">
-                        <Select list={season} onChangeValue={(string) => dispatch(setSeasonValue(string))}/>
+                        <Select list={season} onChangeValue={(string) => {
+                            dispatch(setSeasonValue(string))
+                            dispatch(setThingValue("All"));
+                        }}/>
                         <Select list={thing} onChangeValue={(string) => {
                             dispatch(setThingValue(string));
                             dispatch(setThingTypeValue("All"))
@@ -89,13 +104,33 @@ const MainProductsPage = () => {
                             <svg className="mr-[10px]" width="23" height="23" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M15.9281 15.9463L22 22M18.5 9.75C18.5 14.5824 14.5824 18.5 9.75 18.5C4.9175 18.5 1 14.5824 1 9.75C1 4.9175 4.9175 1 9.75 1C14.5824 1 18.5 4.9175 18.5 9.75Z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
-                            <input type="text" className="font-MyFont bg-[#0000] text-white outline-none h-[40px] placeholder:text-white" placeholder="Search..."/>
+                            <input onChange={e => {
+                                setSearchValue(e.target.value);
+                                setValue(e.target.value)
+                            }} type="text" value={searchValue} className="font-MyFont bg-[#0000] text-white outline-none h-[40px] placeholder:text-white" placeholder="Search..."/>
                         </div>
 
                     </div>
                 </div>
-                <div className="grid grid-cols-4 grid-rows-2 justify-items-center gap-12">
-                    {data?.map(item => (
+                <div className="grid grid-cols-4 justify-items-start gap-12">
+                    {data?.length === 0 || data?.filter(item => item.productName.indexOf(searchDebounce) >= 0).length === 0 &&
+                        <div className="h-[390px]">
+
+                        </div>
+                    }
+                    {searchValue ? filterData?.map(item => (
+                        <ProductCard
+                            key={item.productID}
+                            imgURL={item.imgURL}
+                            productID={item.productID}
+                            productName={item.productName}
+                            productPrice={item.productPrice}
+                            productColors={item.productColors}
+                            season={item.season}
+                            type={item.type}
+                            thingType={item.thingType}
+                        />
+                    )) : data?.map(item => (
                         <ProductCard
                             key={item.productID}
                             imgURL={item.imgURL}

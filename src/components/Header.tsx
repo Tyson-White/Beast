@@ -34,7 +34,7 @@ export default function Header() {
                     <img width={25} src={cart} alt=""/>
                     <p className={page === 'cart' ? 'text-amber-600' : 'text-white'} >Cart</p>
                 </div>
-                <div className="flex flex-col items-center justify-between cursor-pointer" onClick={() => togglePage('profile')}>
+                <div className="flex flex-col items-center justify-between cursor-pointer" onClick={() => togglePage('/auth/login')}>
                     <img width={20} src={profile} alt=""/>
                     <p className={page === 'profile' ? 'text-amber-600' : 'text-white'} >Profile</p>
                 </div>

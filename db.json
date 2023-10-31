@@ -2,7 +2,7 @@
   "products": [
     {
       "productID": 0,
-      "productName": "Fashionable Slim Fit Coat",
+      "productName": "Slim Fit Coat",
       "imgURL": "./src/assets/img/coat_card.png",
       "season": "winter",
       "type": "outerwear",

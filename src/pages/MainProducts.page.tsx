@@ -1,4 +1,4 @@
-import {useCallback, useState} from 'react';
+import {useCallback, useEffect, useState} from 'react';
 
 import Slider from "../components/slider/Slider.tsx";
 import Select from "../components/Select.tsx";
@@ -48,7 +48,13 @@ const MainProductsPage = () => {
     const thingValue = useAppSelector(state => state.select.thingValue)
     const thingTypeValue = useAppSelector(state => state.select.thingTypeValue)
     const [searchDebounce, setSearchDebounce] = useState('')
+    const [isVisible, setIsVisible] = useState<boolean>(false)
 
+    useEffect(() => {
+        setTimeout(() => {
+            setIsVisible(true)
+        }, 150)
+    }, [])
 
     const {data} = useGetProductsQuery({
         page: productsPage,
@@ -67,7 +73,6 @@ const MainProductsPage = () => {
         }, 250)
     ), [])
 
-
     const prevPage = (): void => {
         if (productsPage !== 1) {
             setProductsPage(prev => prev - 1)
@@ -81,10 +86,10 @@ const MainProductsPage = () => {
     }
 
     return (
-        <div>
+        <div className={`opacity-0 duration-200 ${isVisible && "opacity-[1.0]"}`}>
 
             <Slider/>
-            <div className="container h-[100%] max-w-[1100px] mx-auto ">
+            <div className={`container h-[100%] max-w-[1100px] mx-auto`}>
                 <div className="main_page_header h-[60px] rounded-[2px] my-[20px] flex justify-between">
                     <div className="flex">
                         <Select list={season} onChangeValue={(string) => {
@@ -151,7 +156,7 @@ const MainProductsPage = () => {
                     </svg>
                     </button>
                     {data && [...new Array(2)].map((_, index) => (
-                        <button className={`h-[43px] w-[43px]  font-bold ${productsPage === index + 1 && 'bg-[#282828] text-white text-[20px] rounded-[2px]'}`}
+                        <button key={index + 1} className={`h-[43px] w-[43px]  font-bold ${productsPage === index + 1 && 'bg-[#282828] text-white text-[20px] rounded-[2px]'}`}
                             onClick={() => setProductsPage(index + 1)}
                         >{index + 1}</button>
                     ))}

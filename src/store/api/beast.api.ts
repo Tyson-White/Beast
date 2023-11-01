@@ -10,6 +10,11 @@ interface ProductsGet {
     searchValue: string
 }
 
+interface IUser {
+    userId: string,
+    userEmail: string
+}
+
 export const beastApi = createApi({
     reducerPath: 'beastApi',
     baseQuery: fetchBaseQuery({
@@ -19,9 +24,15 @@ export const beastApi = createApi({
         getProducts: builder.query<IProduct[], ProductsGet>({
             query: (options) =>
                 `products?_limit=${options.limit}&_page=${options.page}${options.thingType && options.thingType.toLowerCase() !== "all" ? "&thingType=" + options.thingType.toLowerCase() : ''}${options.type && options.type.toLowerCase() !== "all" ? "&type=" + options.type.toLowerCase() : ''}${options.season && options.season.toLowerCase() !== 'all' ? "&season=" + options.season.toLowerCase() : ''}`
-        })
+        }),
+        createUser: builder.mutation<IUser, IUser>({
+            query: (user) => ({
+                url: `users/${user}`,
+                method: 'PATCH',
+            })
 
+        })
     })
 })
 
-export const { useGetProductsQuery } = beastApi
+export const { useGetProductsQuery, useCreateUserMutation } = beastApi

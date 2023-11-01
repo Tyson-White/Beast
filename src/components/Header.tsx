@@ -6,11 +6,13 @@ import heart from "../assets/icons/heart.svg"
 import cart from "../assets/icons/cart.svg"
 import profile from "../assets/icons/profile.svg"
 import loginIcon from "../assets/icons/login.svg"
+import home from "../assets/icons/home.svg"
+
 import {useNavigate} from "react-router-dom";
 import {useAppSelector} from "../store/hooks/hooks.ts";
 import SexSelect from "./SexSelect.tsx";
 export default function Header() {
-    const [page, setPage] = useState<string>('')
+    const [page, setPage] = useState<string>('/')
     const navigate = useNavigate()
     const isAuth = useAppSelector(state => state.auth.isAuth)
     const togglePage = (name: string):void => {
@@ -20,16 +22,20 @@ export default function Header() {
 
     if (isAuth) {
         return (
-            <div className="header h-[116px]">
+            <div className="header h-[80px]">
                 <div className="container h-[100%] max-w-[1100px] mx-auto">
                     <div className="h-[100%] flex justify-between items-center">
                         <SexSelect/>
-                        <div className="text-[64px] font-bold text-white cursor-pointer" onClick={() => togglePage('/')}>BEAST</div>
+                        <div className="text-[54px] font-bold text-white cursor-pointer" onClick={() => togglePage('/')}>BEAST</div>
 
-                        <div className="flex justify-between text-white w-[210px] ">
+                        <div className="flex justify-between text-white h-[40px] w-[230px] ">
+                            <div className="flex flex-col items-center justify-between cursor-pointer" onClick={() => togglePage('/')}>
+                                <img width={22} src={home} alt=""/>
+                                <p className={`${page === '/' ? 'text-amber-600' : 'text-white'} text-[15px]`} >Home</p>
+                            </div>
                             <div className="flex flex-col items-center justify-between cursor-pointer" onClick={() => togglePage('favourites')}>
                                 <img width={25} src={heart} alt=""/>
-                                <p className={page === 'favourites' ? 'text-amber-600' : 'text-white'}>Favourites</p>
+                                <p className={`${page === 'favourites' ? 'text-amber-600' : 'text-white'} text-[15px]`}>Favourites</p>
                             </div>
                             <div className="flex flex-col items-center cursor-pointer relative" onClick={() => togglePage('cart')}>
                                 <div className="absolute w-[15px] h-[15px] bg-amber-50 rounded-[50%] top-[-5px] right-[-5px]
@@ -39,12 +45,11 @@ export default function Header() {
 
                                 </div>
                                 <img width={25} src={cart} alt=""/>
-                                <p className={page === 'cart' ? 'text-amber-600' : 'text-white'} >Cart</p>
+                                <p className={`${page === 'cart' ? 'text-amber-600' : 'text-white'} text-[15px]`} >Cart</p>
                             </div>
-
                                 <div className="flex flex-col items-center justify-between cursor-pointer" onClick={() => togglePage('/profile')}>
-                                    <img width={20} src={profile} alt=""/>
-                                    <p className={page === '/profile' ? 'text-amber-600' : 'text-white'} >Profile</p>
+                                    <img width={17} src={profile} alt=""/>
+                                    <p className={`${page === '/profile' ? 'text-amber-600' : 'text-white'} text-[15px]`} >Profile</p>
                                 </div>
                         </div>
                     </div>

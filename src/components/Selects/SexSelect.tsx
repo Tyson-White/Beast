@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import arrowSVG from '../assets/icons/arrow.svg'
+import arrowSVG from '../../assets/icons/arrow.svg'
 const SexSelect = () => {
     const [isOpened, setIsOpened] = useState<boolean>(false)
     const [selectedVariant, setSelectedVariant] = useState<string>('MEN')
@@ -15,7 +15,7 @@ const SexSelect = () => {
             </div>
             <div className={`  ${isOpened ? "h-260px py-[10px]" : "h-[0px] py-[0px] overflow-hidden"} shadow-md  w-[140px] absolute bg-white rounded-[5px] top-[115%] z-10 text-center flex flex-col`}>
                 {selectVariants.map(item => (
-                    <div onClick={() => setSelectedVariant(item)} className={`${selectedVariant === item && 
+                    <div key={item} onClick={() => setSelectedVariant(item)} className={`${selectedVariant === item && 
                     "bg-[#282828] text-white"}
                      rounded-[5px] text-[20px] font-bold mb-[10px] py-[5px] w-[90%] mx-auto last:my-0 ${selectedVariant !== item && 'hover:bg-[#6665]'}`}>
                         {item}

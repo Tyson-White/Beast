@@ -10,25 +10,23 @@ body {
   font-family: "League Spartan", serif;
 }
 
+.profile_header {
+    background: rgb(40,40,40);
+    background: linear-gradient(90deg, rgba(40,40,40,1) 0%, rgba(59,59,59,1) 100%);
+}
+
 .header {
-  background: rgb(40, 40, 40);
-  background: linear-gradient(
-    90deg,
-    rgba(40, 40, 40, 1) 0%,
-    rgba(138, 140, 138, 1) 100%
-  );
+    background: rgb(40,40,40);
+    background: linear-gradient(90deg, rgba(40,40,40,1) 0%, rgba(59,59,59,1) 100%);
 }
 
 .main_page_header {
-  background: rgb(40, 40, 40);
-  background: linear-gradient(
-          90deg,
-          rgba(40, 40, 40, 1) 0%,
-          rgba(138, 140, 138, 1) 100%
-  );
+    background: rgb(40,40,40);
+    background: linear-gradient(90deg, rgba(40,40,40,1) 0%, rgba(59,59,59,1) 100%);
 }
 
 .sliderArrow:hover svg path {
   transition: 0.2s;
   fill: #C9C9C9;
 }
+

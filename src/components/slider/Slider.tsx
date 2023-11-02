@@ -10,7 +10,7 @@ const Slider = () => {
 
     const [offset, setOffset] = useState<number>(0)
     const [bannerPage, setBannerPage] = useState<number>(1)
-    const [timeoutRef, setTimeoutRef] = useState<number>()
+    const [timeoutRef, setTimeoutRef] = useState<number | undefined>()
     const bannersList:IBanner[] = [
         {
             img: newSeasonBG,

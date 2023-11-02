@@ -1,13 +1,14 @@
 import {useCallback, useEffect, useState} from 'react';
 
 import Slider from "../components/slider/Slider.tsx";
-import Select from "../components/Select.tsx";
+import Select from "../components/Selects/Select.tsx";
 import {useAppSelector, useAppDispatch} from "../store/hooks/hooks.ts";
 import {setSeasonValue, setThingTypeValue, setThingValue} from "../store/slices/selectSlice.ts";
 import ProductCard from "../components/ProductCard.tsx";
 import {useGetProductsQuery} from "../store/api/beast.api.ts";
 
 import debounce from "lodash.debounce"
+import Skeleton from "../components/Skeleton.tsx";
 
 // SliderBanner backgrounds
 
@@ -56,7 +57,7 @@ const MainProductsPage = () => {
         }, 150)
     }, [])
 
-    const {data} = useGetProductsQuery({
+    const {data, isLoading} = useGetProductsQuery({
         page: productsPage,
         limit: PAGE_LIMIT,
         season: seasonValue,
@@ -89,7 +90,7 @@ const MainProductsPage = () => {
         <div className={`opacity-0 duration-200 ${isVisible && "opacity-[1.0]"}`}>
 
             <Slider/>
-            <div className={`container h-[100%] max-w-[1100px] mx-auto`}>
+            <div className={`container h-[100%] max-w-[1100px] mx-auto  relative`}>
                 <div className="main_page_header h-[60px] rounded-[2px] my-[20px] flex justify-between">
                     <div className="flex">
                         <Select list={season} onChangeValue={(string) => {
@@ -123,31 +124,36 @@ const MainProductsPage = () => {
 
                         </div>
                     }
-                    {searchValue ? filterData?.map(item => (
-                        <ProductCard
-                            key={item.productID}
-                            imgURL={item.imgURL}
-                            productID={item.productID}
-                            productName={item.productName}
-                            productPrice={item.productPrice}
-                            productColors={item.productColors}
-                            season={item.season}
-                            type={item.type}
-                            thingType={item.thingType}
-                        />
-                    )) : data?.map(item => (
-                        <ProductCard
-                            key={item.productID}
-                            imgURL={item.imgURL}
-                            productID={item.productID}
-                            productName={item.productName}
-                            productPrice={item.productPrice}
-                            productColors={item.productColors}
-                            season={item.season}
-                            type={item.type}
-                            thingType={item.thingType}
-                        />
-                    ))}
+                    {isLoading ? [...new Array(PAGE_LIMIT)].map(() => (
+                        <Skeleton/>
+                    )) :
+                        searchValue ? filterData?.map(item => (
+                            <ProductCard
+                                key={item.productID}
+                                imgURL={item.imgURL}
+                                productID={item.productID}
+                                productName={item.productName}
+                                productPrice={item.productPrice}
+                                productColors={item.productColors}
+                                season={item.season}
+                                type={item.type}
+                                thingType={item.thingType}
+                            />
+                        )) : data?.map(item => (
+                            <ProductCard
+                                key={item.productID}
+                                imgURL={item.imgURL}
+                                productID={item.productID}
+                                productName={item.productName}
+                                productPrice={item.productPrice}
+                                productColors={item.productColors}
+                                season={item.season}
+                                type={item.type}
+                                thingType={item.thingType}
+                            />
+                        ))
+                    }
+
                 </div>
                 <div className="w-[300px] mx-auto flex justify-between items-center mt-[45px]">
                     <button onClick={() => prevPage()} className="h-[43px] w-[43px] hover:bg-[#c2c2c2] flex items-center justify-center rounded-[2px]">

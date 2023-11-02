@@ -1,5 +1,5 @@
 import {useState} from 'react';
-import arrowSVG from '../assets/icons/arrow.svg'
+import arrowSVG from '../../assets/icons/arrow.svg'
 const SexSelect = () => {
     const [isOpened, setIsOpened] = useState<boolean>(false)
     const [selectedVariant, setSelectedVariant] = useState<string>('MEN')

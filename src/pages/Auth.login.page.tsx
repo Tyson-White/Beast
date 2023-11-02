@@ -1,11 +1,11 @@
 import {useEffect, useState} from 'react';
-import Auth from "./Auth.tsx";
-import AuthInput from "./Auth.input.tsx";
+import Auth from "../components/Auth/Auth.tsx";
+import AuthInput from "../components/Auth/Auth.input.tsx";
 import {useNavigate, } from "react-router-dom";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import {useDispatch} from "react-redux";
-import {setUser} from "../../store/slices/authSlice.ts";
-const AuthLogin = () => {
+import {setUser} from "../store/slices/authSlice.ts";
+const AuthLoginPage = () => {
     const navigate = useNavigate()
     const [emailValue, setEmailValue] = useState<string>('')
     const [passwordValue, setPasswordValue] = useState<string>('')
@@ -20,9 +20,6 @@ const AuthLogin = () => {
     }, [])
 
     const onLoginUser = () => {
-
-
-
         const auth = getAuth();
         signInWithEmailAndPassword(auth, emailValue, passwordValue)
             .then(({user}) => {
@@ -75,4 +72,4 @@ const AuthLogin = () => {
     );
 };
 
-export default AuthLogin;
+export default AuthLoginPage;

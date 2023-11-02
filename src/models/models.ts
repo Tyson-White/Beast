@@ -1,4 +1,3 @@
-import {User} from "../types/types.ts";
 
 export interface SelectState {
     seasonValue: string,
@@ -34,4 +33,13 @@ export interface ISelect {
     list: string[]
     onChangeValue?: (string: string) => void,
     dependence?: string
+}
+
+export interface INavButton {
+    title: string,
+    page: string,
+    icon: string,
+    pageRef: string
+    iconWidth: number,
+    setPage: (page:string) => void
 }

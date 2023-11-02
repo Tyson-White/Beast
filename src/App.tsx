@@ -1,9 +1,9 @@
 import {useEffect} from "react";
 import {Routes, Route} from "react-router-dom";
-import Header from "./components/Header";
+import Header from "./components/Header/Header.tsx";
 import MainProductsPage from "./pages/MainProducts.page.tsx";
-import AuthLogin from "./pages/auth/Auth.login.tsx";
-import AuthRegister from "./pages/auth/Auth.register.tsx";
+import AuthLoginPage from "./pages/Auth.login.page.tsx";
+import AuthRegisterPage from "./pages/Auth.register.page.tsx";
 import {setUser} from "./store/slices/authSlice.ts";
 import {useDispatch} from "react-redux";
 import ProfilePage from "./pages/Profile.page.tsx";
@@ -27,8 +27,8 @@ function App() {
             <div className="">
                 <Routes>
                     <Route path={'/'} element={<MainProductsPage/>}></Route>
-                    <Route path={'/auth/login'} element={<AuthLogin/>}></Route>
-                    <Route path={'/auth/register'} element={<AuthRegister/>}></Route>
+                    <Route path={'/auth/login'} element={<AuthLoginPage/>}></Route>
+                    <Route path={'/auth/register'} element={<AuthRegisterPage/>}></Route>
                     <Route path={'/profile'} element={<ProfilePage/>}></Route>
                 </Routes>
             </div>

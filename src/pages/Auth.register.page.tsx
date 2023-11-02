@@ -1,50 +1,52 @@
 import {useState} from 'react';
-import Auth from "./Auth.tsx";
+import Auth from "../components/Auth/Auth.tsx";
 import {useNavigate} from "react-router-dom";
-import AuthInput from "./Auth.input.tsx";
+import AuthInput from "../components/Auth/Auth.input.tsx";
 
 import {getAuth, createUserWithEmailAndPassword} from "firebase/auth";
 import {useDispatch} from "react-redux";
-import {setUser} from "../../store/slices/authSlice.ts";
-import {useCreateUserMutation} from "../../store/api/beast.api.ts";
-import {setIsLoading} from "../../store/slices/appSlice.ts";
+import {setUser} from "../store/slices/authSlice.ts";
+import {useCreateUserMutation} from "../store/api/beast.api.ts";
 
-const AuthRegister = () => {
+const AuthRegisterPage = () => {
 
     const navigate = useNavigate()
     const [emailValue, setEmailValue] = useState<string>('')
     const [passwordValue, setPasswordValue] = useState<string>('')
     const [acceptPasswordValue, setAcceptPasswordValue] = useState<string>('')
-    const [onCreateUser, {isLoading}] = useCreateUserMutation()
+    const [onCreateUser] = useCreateUserMutation()
     const dispatch = useDispatch()
-    if (isLoading) {
-        dispatch(setIsLoading(true))
-    }
-    const onRegisterUser = () => {
 
+    const clearInputs = () => {
+        setEmailValue('')
+        setPasswordValue('')
+        setAcceptPasswordValue('')
+    }
+
+    const createUser = (user):void => {
+        dispatch(setUser({
+            userId: user.uid,
+            email: user.email,
+            token: user.accessToken
+        }))
+        onCreateUser({userId: user.uid, userEmail: user.email })
+        navigate('/')
+    }
+
+    const onRegisterUser = () => {
         if (emailValue && passwordValue && acceptPasswordValue === passwordValue) {
             const auth = getAuth()
             createUserWithEmailAndPassword(auth, emailValue, passwordValue)
                 .then(({user}) => {
                     if (user.accessToken && user.email && user.uid) {
-                        dispatch(setUser({
-                            userId: user.uid,
-                            email: user.email,
-                            token: user.accessToken
-                        }))
-                        onCreateUser({userId: user.uid, userEmail: user.email })
-                        navigate('/')
-                    } else {
-                        throw new Error('')
+                        createUser(user)
                     }
                 })
                 .catch(() => {
-                });
-            setEmailValue('')
-            setPasswordValue('')
-            setAcceptPasswordValue('')
-        }
 
+                });
+            clearInputs()
+        }
     }
 
     return (
@@ -73,4 +75,4 @@ const AuthRegister = () => {
     );
 };
 
-export default AuthRegister;
+export default AuthRegisterPage;
